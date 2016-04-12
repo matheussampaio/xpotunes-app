@@ -33,5 +33,7 @@ dependencies {
     compile 'net.danlew:android.joda:2.9.3'
     compile 'org.apache.commons:commons-lang3:3.0'
     compile 'com.google.android.exoplayer:exoplayer:r1.5.7'
+    compile 'com.sothree.slidinguppanel:library:3.3.0'
+    compile 'com.malinskiy:materialicons:1.0.2'
 
 }

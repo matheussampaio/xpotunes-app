@@ -80,4 +80,8 @@ public class XPOMusicPlayer {
     public int getDuration() {
         return (int) new Duration(mBeginInstant, new Instant()).getStandardSeconds();
     }
+
+    public Music getMusic() {
+        return mMusic;
+    }
 }

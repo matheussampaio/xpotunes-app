@@ -80,6 +80,20 @@ public class MainActivity extends AppCompatActivity {
     @Subscribe
     public void onClockTimerEvent(ClockTimerEvent event) {
         if (mXPOMusicPlayer.getDuration() >= 30) {
+
+            Call<Music> musicCall = RESTful.getInstance().addView(mXPOMusicPlayer.getMusic().getId());
+            musicCall.enqueue(new Callback<Music>() {
+                @Override
+                public void onResponse(Call<Music> call, Response<Music> response) {
+                    Logger.i("view add: ");
+                }
+
+                @Override
+                public void onFailure(Call<Music> call, Throwable t) {
+
+                }
+            });
+
             fetchRandomMusic();
         }
     }
