@@ -174,7 +174,6 @@ public class TrailerActivity extends AppCompatActivity {
         mProgressBar.setVisibility(View.VISIBLE);
 
         mSkipButton.setEnabled(false);
-        mStopButton.setEnabled(false);
         mPlayButton.setEnabled(false);
         mWholeMusicButton.setEnabled(false);
         mPauseButton.setEnabled(false);
@@ -188,7 +187,6 @@ public class TrailerActivity extends AppCompatActivity {
         mProgressBar.setVisibility(View.INVISIBLE);
 
         mSkipButton.setEnabled(true);
-        mStopButton.setEnabled(true);
         mPlayButton.setEnabled(true);
         mWholeMusicButton.setEnabled(true);
         mPauseButton.setEnabled(true);

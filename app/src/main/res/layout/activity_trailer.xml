@@ -81,7 +81,7 @@
                     android:layout_width="250dp"
                     android:layout_height="250dp"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/default_music_image2"/>
+                    android:src="@drawable/default_music_image2" />
 
                 <SeekBar
                     android:id="@+id/musicSeekBar"
@@ -106,8 +106,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:textColor="@color/neutral"
                     android:text=""
+                    android:textColor="@color/neutral"
                     android:textSize="34sp" />
 
                 <TextView
@@ -116,8 +116,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/musicTitleTextView"
                     android:layout_centerHorizontal="true"
-                    android:textColor="@color/primary"
                     android:text=""
+                    android:textColor="@color/primary"
                     android:textSize="20sp" />
 
             </RelativeLayout>
@@ -200,7 +200,6 @@
                     android:text="STOP"
                     android:textColor="@color/light_gray"
                     android:visibility="invisible" />
-
 
             </RelativeLayout>
 
