@@ -1,48 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen.MainActivity_">
+    android:background="@color/dark_gray"
+    tools:context=".screen.main.trailer.TrailerActivity_">
 
-    <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    <com.sothree.slidinguppanel.SlidingUpPanelLayout
         android:id="@+id/sliding_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
-        sothree:umanoPanelHeight="68dp"
-        sothree:umanoShadowHeight="4dp">
+        app:umanoPanelHeight="68dp"
+        app:umanoShadowHeight="4dp">
 
         <!-- MainView -->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true">
+            android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/playButton"
-                android:layout_width="wrap_content"
+            <!-- Toolbar -->
+            <RelativeLayout
+                android:id="@+id/mainToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:layout_alignParentTop="true"
+                android:padding="16dp">
+
+                <net.steamcrafted.materialiconlib.MaterialIconView
+                    android:id="@+id/toolbarArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:scaleType="center"
+                    app:materialIcon="arrow_bottom_right"
+                    app:materialIconColor="@color/primary"
+                    app:materialIconSize="30dp" />
+
+                <TextView
+                    android:id="@+id/statusTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@+id/toolbarArrow"
+                    android:text="Playing Trailer"
+                    android:textColor="@color/light_gray"
+                    android:textSize="24dp" />
+
+                <net.steamcrafted.materialiconlib.MaterialIconView
+                    android:id="@+id/settingsButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="center"
+                    app:materialIcon="settings"
+                    app:materialIconColor="@color/light_gray"
+                    app:materialIconSize="30dp" />
+
+
+            </RelativeLayout>
+
+            <!-- Image & Seekbar -->
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Play" />
+                android:layout_above="@+id/musicDescription"
+                android:layout_below="@+id/mainToolbar"
+                android:layout_marginBottom="32dp"
+                android:layout_marginTop="8dp">
+
+                <!-- Image Placeholder -->
+                <RelativeLayout
+                    android:id="@+id/musicImageView"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:background="#000"></RelativeLayout>
+
+                <SeekBar
+                    android:id="@+id/musicSeekBar"
+                    android:layout_width="250dp"
+                    android:layout_height="64dp"
+                    android:layout_below="@+id/musicImageView"
+                    android:layout_alignLeft="@+id/musicImageView"
+                    android:layout_alignStart="@+id/musicImageView"/>
 
 
-            <Button
-                android:id="@+id/stopButton"
-                android:layout_width="wrap_content"
+            </RelativeLayout>
+
+            <!-- Description -->
+            <RelativeLayout
+                android:id="@+id/musicDescription"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Stop"
-                android:visibility="invisible" />
+                android:layout_above="@+id/mainMediaControls"
+                android:layout_marginBottom="24dp">
+
+                <TextView
+                    android:id="@+id/musicTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/neutral"
+                    android:textSize="34sp" />
+
+                <TextView
+                    android:id="@+id/musicSubTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/musicTitleTextView"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/primary"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+
+
+            <!-- Media Controls -->
+            <RelativeLayout
+                android:id="@+id/mainMediaControls"
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="16dp">
+
+
+                <net.steamcrafted.materialiconlib.MaterialIconView
+                    android:id="@+id/playButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:scaleType="center"
+                    app:materialIcon="play"
+                    app:materialIconColor="@color/primary"
+                    app:materialIconSize="60dp" />
+
+                <net.steamcrafted.materialiconlib.MaterialIconView
+                    android:id="@+id/skipButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@+id/playButton"
+                    android:scaleType="center"
+                    app:materialIcon="skip_next"
+                    app:materialIconColor="@color/light_gray"
+                    app:materialIconSize="40dp" />
+
+                <net.steamcrafted.materialiconlib.MaterialIconView
+                    android:id="@+id/stopButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:scaleType="center"
+                    android:visibility="invisible"
+                    app:materialIcon="stop"
+                    app:materialIconColor="@color/primary"
+                    app:materialIconSize="60dp" />
+
+            </RelativeLayout>
 
         </RelativeLayout>
 
-        <!-- Playlist View -->
+        <!-- History View -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true">
-
 
             <!-- Topbar -->
             <RelativeLayout
@@ -62,11 +192,9 @@
 
             </RelativeLayout>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Playlist" />
+            <!-- Content -->
+
+            <!-- TODO: List view os musics-->
 
         </RelativeLayout>
 

@@ -3,7 +3,9 @@ package com.xpotunes.screen.main.trailer;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.xpotunes.R;
 import com.xpotunes.clock.ClockTimer;
@@ -19,9 +21,9 @@ import com.xpotunes.utils.XPOTunesSharedPref_;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.OptionsItem;
-import org.androidannotations.annotations.OptionsMenu;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.WindowFeature;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -32,7 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-@OptionsMenu(R.menu.settings)
+@WindowFeature({ Window.FEATURE_NO_TITLE })
 @EActivity(R.layout.activity_trailer)
 public class TrailerActivity extends AppCompatActivity {
 
@@ -40,10 +42,22 @@ public class TrailerActivity extends AppCompatActivity {
     XPOTunesSharedPref_ mXPOXpoTunesSharedPref;
 
     @ViewById(R.id.playButton)
-    Button mPlayButton;
+    ImageView mPlayButton;
 
     @ViewById(R.id.stopButton)
-    Button mStopButton;
+    ImageView mStopButton;
+
+    @ViewById(R.id.skipButton)
+    ImageView mSkipButton;
+
+    @ViewById(R.id.musicTitleTextView)
+    TextView mMusicTitle;
+
+    @ViewById(R.id.musicSubTitleTextView)
+    TextView mMusicSubTitle;
+
+    @ViewById(R.id.settingsButton)
+    ImageView mSettingsButton;
 
     @Bean
     XPOMusicPlayer mXPOMusicPlayer;
@@ -80,12 +94,19 @@ public class TrailerActivity extends AppCompatActivity {
         mClockTimer.start();
         fetchRandomMusic();
 
+        mSkipButton.setVisibility(View.VISIBLE);
         mStopButton.setVisibility(View.VISIBLE);
+    }
+
+    @Click(R.id.skipButton)
+    void onClickSkipButton() {
+        fetchRandomMusic();
     }
 
     @Click(R.id.stopButton)
     void onClickStopButton() {
         mStopButton.setVisibility(View.INVISIBLE);
+        mSkipButton.setVisibility(View.INVISIBLE);
 
         mXPOMusicPlayer.pause();
         mClockTimer.stop();
@@ -93,9 +114,21 @@ public class TrailerActivity extends AppCompatActivity {
         mPlayButton.setVisibility(View.VISIBLE);
     }
 
-    @OptionsItem(R.id.settings)
-    void menuSettings() {
+    @Click(R.id.settingsButton)
+    void onClickSettingsButton() {
         SettingsActivity_.intent(this).start();
+    }
+
+    void loading() {
+        mSkipButton.setEnabled(false);
+        mStopButton.setEnabled(false);
+        mPlayButton.setEnabled(false);
+    }
+
+    void loaded() {
+        mSkipButton.setEnabled(true);
+        mStopButton.setEnabled(true);
+        mPlayButton.setEnabled(true);
     }
 
     @Subscribe
@@ -119,7 +152,15 @@ public class TrailerActivity extends AppCompatActivity {
         }
     }
 
+    @UiThread
+    public void updateDescription(Music music) {
+        mMusicTitle.setText(music.getTitle());
+        mMusicSubTitle.setText(String.format("%s - %s", music.getAlbum(), music.getArtist()));
+    }
+
     void fetchRandomMusic() {
+        loading();
+
         Call<List<Music>> randomMusic = RESTful.getInstance().getRandomMusic();
 
         randomMusic.enqueue(new Callback<List<Music>>() {
@@ -127,11 +168,15 @@ public class TrailerActivity extends AppCompatActivity {
             public void onResponse(Call<List<Music>> call, Response<List<Music>> response) {
                 Music music = response.body().get(0);
 
+                updateDescription(music);
+
                 mXPOMusicPlayer
                         .setMusic(music)
                         .pause()
                         .prepare()
                         .play();
+
+                loaded();
             }
 
             @Override

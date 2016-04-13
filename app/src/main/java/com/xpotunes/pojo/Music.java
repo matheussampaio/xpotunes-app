@@ -22,12 +22,9 @@ public class Music {
     @SerializedName("filename")
     @Expose
     private String filename;
-    @SerializedName("author")
+    @SerializedName("artist")
     @Expose
-    private String author;
-
-
-
+    private String artist;
     @SerializedName("genre")
     @Expose
     private String genre;
@@ -121,17 +118,17 @@ public class Music {
     }
 
     /**
-     * @return The author
+     * @return The artist
      */
-    public String getAuthor() {
-        return author;
+    public String getArtist() {
+        return artist;
     }
 
     /**
-     * @param author The author
+     * @param artist The artist
      */
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setArtist(String artist) {
+        this.artist = artist;
     }
 
     /**
