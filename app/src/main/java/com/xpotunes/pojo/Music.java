@@ -25,6 +25,15 @@ public class Music {
     @SerializedName("author")
     @Expose
     private String author;
+
+
+
+    @SerializedName("genre")
+    @Expose
+    private String genre;
+    @SerializedName("description")
+    @Expose
+    private String description;
     @SerializedName("album")
     @Expose
     private String album;
@@ -193,6 +202,34 @@ public class Music {
      */
     public void setViews(Integer views) {
         this.views = views;
+    }
+
+    /**
+     * @return The genre
+     */
+    public String getGenre() {
+        return genre;
+    }
+
+    /**
+     * @param genre The genre
+     */
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    /**
+     * @return The description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description The description
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

@@ -23,6 +23,7 @@ public class Logger {
     public static void e(String msg) {
         e(TAG, msg);
     }
+
     public static void e(String msg, Throwable t) {
         e(TAG, msg, t);
     }

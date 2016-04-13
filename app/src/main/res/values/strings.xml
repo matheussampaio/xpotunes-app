@@ -1,3 +1,59 @@
 <resources>
     <string name="app_name">XPO Tunes</string>
+    <string name="start_game">Start Game</string>
+    <string name="stop_game">Stop Game</string>
+
+    <string name="default_song_name">Song Name</string>
+    <string name="default_time">0s</string>
+    <string name="select_musics">Select Musics</string>
+
+    <!-- Activity Labels -->
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_music_library">Playlist</string>
+
+    <!-- Strings related to Settings -->
+
+
+    <!-- Language Preferences -->
+    <string name="pref_language">Application Language</string>
+    <string-array name="pref_language_list">
+        <item>English (US)</item>
+        <item>Portuguese (Brazil)</item>
+    </string-array>
+    <string-array name="pref_language_values">
+        <item>en-US</item>
+        <item>pt-rBR</item>
+    </string-array>
+
+    <!-- Alert Before Stop Checkbox-->
+    <string name="pref_alert_stop_summary">Play a sound before stop music</string>
+    <string name="pref_alert_stop">Alert before stop</string>
+
+    <!-- Alert Before Start Checkbox -->
+    <string name="pref_alert_start_summary">Play a sound before start music</string>
+    <string name="pref_alert_start">Alert before start</string>
+
+    <!-- Others -->
+    <string name="settings">Settings</string>
+    <string name="pref_random_time_summary">Stop and play in random times</string>
+    <string name="pref_random_time">Random Time</string>
+    <string name="pref_minimum_time_summary">Minimum amount of seconds for playing</string>
+    <string name="pref_minimum_time">Minimum Time</string>
+    <string name="pref_maximum_time_summary">Maximum amount of seconds for playing</string>
+    <string name="pref_maximum_time">Maximum Time</string>
+    <string name="pref_intermittent_time_summary">Wait time to start playing again</string>
+    <string name="pref_intermittent_time">Wait Time</string>
+    <string name="pref_playing_time_summary">Time for playing the music</string>
+    <string name="pref_playing_time">Playing Time</string>
+
+    <!-- Preferences Keys -->
+    <string name="prefPlayingTimeKey">playingTime</string>
+    <string name="prefRandomTimeKey">randomTime</string>
+    <string name="prefMinimumTimeKey">minimumTime</string>
+    <string name="prefMaximumTimeKey">maximumTime</string>
+    <string name="prefIntermittentTimeKey">intermittentTime</string>
+    <string name="prefLanguageKey">language</string>
+    <string name="restart_app_language">Restart for applying the new language</string>
+
+
 </resources>

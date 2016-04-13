@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">XPO Tunes</string>
+    <string name="start_game">Iniciar Jogo</string>
+    <string name="stop_game">Parar Jogo</string>
+
+    <string name="default_song_name">Título da Música</string>
+    <string name="default_time">0s</string>
+    <string name="select_musics">Selecionar Músicas</string>
+
+    <!-- Activity Labels -->
+    <string name="title_activity_settings">Configurações</string>
+    <string name="title_activity_music_library">Lista de Reprodução</string>
+
+    <!-- Language Preferences -->
+    <string name="pref_language">Linguagem</string>
+    <string-array name="pref_language_list">
+        <item>English (US)</item>
+        <item>Português (Brasil)</item>
+    </string-array>
+    <string-array name="pref_language_values">
+        <item>en-US</item>
+        <item>pt-rBR</item>
+    </string-array>
+
+    <!-- Alert Before Stop Checkbox-->
+    <string name="pref_alert_stop_summary">Alerta antes de parar a música</string>
+    <string name="pref_alert_stop">Alerta antes de parar</string>
+
+    <!-- Alert Before Start Checkbox -->
+    <string name="pref_alert_start_summary">Alerta antes de iniciar a música</string>
+    <string name="pref_alert_start">Alerta antes de iniciar</string>
+
+    <!-- Others -->
+    <string name="settings">Configurações</string>
+    <string name="pref_random_time_summary">Parar e Começar em tempos aleatórios</string>
+    <string name="pref_random_time">Tempo Aleatório</string>
+    <string name="pref_minimum_time_summary">Quantidade mínima de segundos para tocar</string>
+    <string name="pref_minimum_time">Tempo Mínimo</string>
+    <string name="pref_maximum_time_summary">Quantidade máxima de segundos para tocar</string>
+    <string name="pref_maximum_time">Tempo Máximo</string>
+    <string name="pref_intermittent_time_summary">Tempo entre parar e recomeçar a tocar</string>
+    <string name="pref_intermittent_time">Tempo Intermitente</string>
+    <string name="pref_playing_time_summary">Quantidade de segundos para tocar</string>
+    <string name="pref_playing_time">Duração</string>
+    <string name="restart_app_language">Reinicie para aplicar a nova linguagem</string>
+
+    <!-- Preferences Keys -->
+    <string name="prefPlayingTimeKey">playingTime</string>
+    <string name="prefRandomTimeKey">randomTime</string>
+    <string name="prefMinimumTimeKey">minimumTime</string>
+    <string name="prefMaximumTimeKey">maximumTime</string>
+    <string name="prefIntermittentTimeKey">intermittentTime</string>
+    <string name="prefLanguageKey">language</string>
+</resources>

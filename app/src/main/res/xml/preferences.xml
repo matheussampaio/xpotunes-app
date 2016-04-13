@@ -1,0 +1,62 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="@string/prefRandomTimeKey"
+        android:summary="@string/pref_random_time_summary"
+        android:title="@string/pref_random_time" />
+
+    <EditTextPreference
+        android:defaultValue="15"
+        android:dependency="randomTime"
+        android:inputType="time"
+        android:key="@string/prefMinimumTimeKey"
+        android:negativeButtonText="@null"
+        android:summary="@string/pref_minimum_time_summary"
+        android:title="@string/pref_minimum_time" />
+
+    <EditTextPreference
+        android:defaultValue="45"
+        android:dependency="randomTime"
+        android:key="@string/prefMaximumTimeKey"
+        android:negativeButtonText="@null"
+        android:summary="@string/pref_maximum_time_summary"
+        android:title="@string/pref_maximum_time" />
+
+    <EditTextPreference
+        android:defaultValue="30"
+        android:key="@string/prefPlayingTimeKey"
+        android:negativeButtonText="@null"
+        android:summary="@string/pref_playing_time_summary"
+        android:title="@string/pref_playing_time" />
+
+    <EditTextPreference
+        android:defaultValue="15"
+        android:key="@string/prefIntermittentTimeKey"
+        android:negativeButtonText="@null"
+        android:summary="@string/pref_intermittent_time_summary"
+        android:title="@string/pref_intermittent_time" />
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="alertStop"
+        android:summary="@string/pref_alert_stop_summary"
+        android:title="@string/pref_alert_stop" />
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="alertStart"
+        android:summary="@string/pref_alert_start_summary"
+        android:title="@string/pref_alert_start" />
+
+    <ListPreference
+        android:defaultValue="English (US)"
+        android:entries="@array/pref_language_list"
+        android:entryValues="@array/pref_language_values"
+        android:key="@string/prefLanguageKey"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:summary="%s"
+        android:title="@string/pref_language" />
+
+</PreferenceScreen>

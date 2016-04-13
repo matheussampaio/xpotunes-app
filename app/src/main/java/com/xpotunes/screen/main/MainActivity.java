@@ -1,8 +1,7 @@
-package com.xpotunes.screen;
+package com.xpotunes.screen.main;
 
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 
 import com.xpotunes.R;
@@ -11,13 +10,15 @@ import com.xpotunes.clock.ClockTimerEvent;
 import com.xpotunes.music.XPOMusicPlayer;
 import com.xpotunes.pojo.Music;
 import com.xpotunes.rest.RESTful;
+import com.xpotunes.screen.settings.SettingsActivity_;
 import com.xpotunes.utils.Logger;
 
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OptionsItem;
+import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.WindowFeature;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -27,7 +28,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-@WindowFeature({ Window.FEATURE_NO_TITLE })
+@OptionsMenu(R.menu.settings)
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
 
@@ -77,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
         mPlayButton.setVisibility(View.VISIBLE);
     }
 
+    @OptionsItem(R.id.settings)
+    void menuSettings() {
+        SettingsActivity_.intent(this).start();
+    }
+
     @Subscribe
     public void onClockTimerEvent(ClockTimerEvent event) {
         if (mXPOMusicPlayer.getDuration() >= 30) {
@@ -107,10 +113,10 @@ public class MainActivity extends AppCompatActivity {
                 Music music = response.body().get(0);
 
                 mXPOMusicPlayer
-                    .setMusic(music)
-                    .pause()
-                    .prepare()
-                    .play();
+                        .setMusic(music)
+                        .pause()
+                        .prepare()
+                        .play();
             }
 
             @Override
