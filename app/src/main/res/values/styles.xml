@@ -7,6 +7,8 @@
         <item name="colorPrimaryDark">#283037</item>
         <item name="colorAccent">#42CC42</item>
         <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+        <item name="android:spinnerDropDownItemStyle">@style/mySpinnerItemStyle</item>
+
         <!--<item name="android:buttonStyle">@style/RobotoButtonStyle</item>-->
     </style>
 
@@ -29,6 +31,11 @@
 
     <style name="RobotoButtonStyle" parent="android:Widget.Holo.Button">
         <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+
+    <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="android:textColor">@color/light_gray</item>
     </style>
 
 </resources>

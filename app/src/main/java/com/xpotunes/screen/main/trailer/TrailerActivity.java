@@ -8,7 +8,9 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.xpotunes.R;
 import com.xpotunes.clock.ClockTimer;
@@ -31,6 +33,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.WindowFeature;
+import org.androidannotations.annotations.res.StringArrayRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -47,6 +50,9 @@ public class TrailerActivity extends AppCompatActivity {
 
     @Pref
     XPOTunesSharedPref_ mXPOXpoTunesSharedPref;
+
+    @StringArrayRes(R.array.genre_entry_values)
+    String[] mGenreValues;
 
     @ViewById(R.id.playButton)
     Button mPlayButton;
@@ -75,6 +81,9 @@ public class TrailerActivity extends AppCompatActivity {
     @ViewById(R.id.progressBar)
     ProgressBar mProgressBar;
 
+    @ViewById(R.id.genreSpinner)
+    Spinner mGenreSpinner;
+
     @Bean
     XPOMusicPlayer mXPOMusicPlayer;
 
@@ -95,8 +104,6 @@ public class TrailerActivity extends AppCompatActivity {
 
         register();
 
-        mClockTimer.start();
-
         boolean localMusic = mXPOXpoTunesSharedPref.localMusic().getOr(false);
 
         if (localMusic) {
@@ -108,8 +115,6 @@ public class TrailerActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-        mClockTimer.stop();
-
         unregister();
 
         super.onStop();
@@ -146,7 +151,11 @@ public class TrailerActivity extends AppCompatActivity {
 
         mXPOMusicPlayer.pause();
 
+        mClockTimer.stop();
+
         mPlayButton.setVisibility(View.VISIBLE);
+
+        loaded();
     }
 
     @Click(R.id.wholeMusicButton)
@@ -180,8 +189,7 @@ public class TrailerActivity extends AppCompatActivity {
     }
 
     @UiThread
-    @Subscribe
-    void onMusicStartEvent(MusicStartEvent event) {
+    void loaded() {
         mLoading = false;
 
         mProgressBar.setVisibility(View.INVISIBLE);
@@ -190,6 +198,11 @@ public class TrailerActivity extends AppCompatActivity {
         mPlayButton.setEnabled(true);
         mWholeMusicButton.setEnabled(true);
         mPauseButton.setEnabled(true);
+    }
+
+    @Subscribe
+    void onMusicStartEvent(MusicStartEvent event) {
+        loaded();
     }
 
     @Subscribe
@@ -226,18 +239,24 @@ public class TrailerActivity extends AppCompatActivity {
     private void fetchRandomMusic() {
         loading();
 
-        Call<List<Music>> randomMusic = RESTful.getInstance().getRandomMusic();
+        String selectedGenre = mGenreValues[mGenreSpinner.getSelectedItemPosition()];
+
+        Call<List<Music>> randomMusic = RESTful.getInstance().getRandomMusic(selectedGenre);
 
         randomMusic.enqueue(new Callback<List<Music>>() {
             @Override
             public void onResponse(Call<List<Music>> call, Response<List<Music>> response) {
-                Music music = response.body().get(0);
+                if (response.body().size() > 0) {
+                    Music music = response.body().get(0);
 
-                if (!mPlayWholeMusic) {
-                    RESTful.addTrailerView(music.getId());
+                    if (!mPlayWholeMusic) {
+                        RESTful.addTrailerView(music.getId());
+                    }
+
+                    playMusic(music);
+                } else {
+                    nothingToPlay();
                 }
-
-                playMusic(music);
             }
 
             @Override
@@ -248,7 +267,8 @@ public class TrailerActivity extends AppCompatActivity {
     }
 
     private void playMusic(Music music) {
-        System.out.println("start = " + music.getStart() + "  end = " + music.getEnd());
+        mClockTimer.start();
+
         updateDescription(music);
 
         mXPOMusicPlayer.setMusic(music).pause().prepare();
@@ -258,6 +278,12 @@ public class TrailerActivity extends AppCompatActivity {
         }
 
         mXPOMusicPlayer.play();
+    }
+
+    private void nothingToPlay() {
+        onClickStopButton();
+
+        Toast.makeText(this, "We don't have any music on this genre.", Toast.LENGTH_LONG).show();
     }
 
     private void register() {

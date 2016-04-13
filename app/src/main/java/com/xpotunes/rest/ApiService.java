@@ -8,6 +8,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
@@ -25,4 +26,7 @@ public interface ApiService {
 
     @POST("music/{id}/dislike")
     Call<Music> addDislike(@Path("id") String musicId);
+
+    @GET("music/random")
+    Call<List<Music>> getRandomMusic(@Query("genre") String selectedGenre);
 }

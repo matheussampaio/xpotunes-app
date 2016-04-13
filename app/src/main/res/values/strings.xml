@@ -60,5 +60,68 @@
     <string name="prefLanguageKey">language</string>
     <string name="restart_app_language">Restart for applying the new language</string>
 
+    <string-array name="genre_entry_list">
+        <item>Blues</item>
+        <item>Classical</item>
+        <item>Comedy</item>
+        <item>Country</item>
+        <item>Electric</item>
+        <item>Holiday</item>
+        <item>Opera</item>
+        <item>Jazz</item>
+        <item>Alternative</item>
+        <item>Latino</item>
+        <item>Hindi</item>
+        <item>Pop</item>
+        <item>R&amp;B</item>
+        <item>Dance</item>
+        <item>Hip-Hop</item>
+        <item>Rap</item>
+        <item>World</item>
+        <item>Rock</item>
+        <item>Christian</item>
+        <item>Vocal</item>
+        <item>Swing</item>
+        <item>Brazilian</item>
+        <item>Folk</item>
+        <item>Spoken Word</item>
+        <item>Metal</item>
+        <item>Punk</item>
+        <item>Funk</item>
+        <item>Techno</item>
+        <item>420 Blaze It</item>
+    </string-array>
+    <string-array name="genre_entry_values">
+        <item>Blues</item>
+        <item>Classical</item>
+        <item>Comedy</item>
+        <item>Country</item>
+        <item>Electric</item>
+        <item>Holiday</item>
+        <item>Opera</item>
+        <item>Jazz</item>
+        <item>Alternative</item>
+        <item>Latino</item>
+        <item>Hindi</item>
+        <item>Pop</item>
+        <item>R&amp;B</item>
+        <item>Dance</item>
+        <item>Hip-Hop</item>
+        <item>Rap</item>
+        <item>World</item>
+        <item>Rock</item>
+        <item>Christian</item>
+        <item>Vocal</item>
+        <item>Swing</item>
+        <item>Brazilian</item>
+        <item>Folk</item>
+        <item>Spoken Word</item>
+        <item>Metal</item>
+        <item>Punk</item>
+        <item>Funk</item>
+        <item>Techno</item>
+        <item>420 Blaze It</item>
+    </string-array>
+
 
 </resources>
