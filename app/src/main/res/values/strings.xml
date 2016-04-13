@@ -45,8 +45,13 @@
     <string name="pref_intermittent_time">Wait Time</string>
     <string name="pref_playing_time_summary">Time for playing the music</string>
     <string name="pref_playing_time">Playing Time</string>
+    <string name="pref_local_music_summary">Play local music files</string>
+    <string name="pref_local_music">Offline Music</string>
+
+
 
     <!-- Preferences Keys -->
+    <string name="prefLocalMusicKey">showLocalMusic</string>
     <string name="prefPlayingTimeKey">playingTime</string>
     <string name="prefRandomTimeKey">randomTime</string>
     <string name="prefMinimumTimeKey">minimumTime</string>

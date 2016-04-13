@@ -20,8 +20,10 @@ import com.xpotunes.music.event.GamePauseEvent;
 import com.xpotunes.music.event.GamePlayEvent;
 import com.xpotunes.music.event.GameStartEvent;
 import com.xpotunes.music.event.GameStopEvent;
+import com.xpotunes.screen.main.trailer.TrailerActivity_;
 import com.xpotunes.screen.settings.SettingsActivity_;
 import com.xpotunes.utils.Logger;
+import com.xpotunes.utils.XPOTunesSharedPref_;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -33,6 +35,7 @@ import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.res.StringRes;
+import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -45,6 +48,9 @@ import at.markushi.ui.CircleButton;
 public class GameActivity extends AppCompatActivity {
 
     private static final int SELECT_MUSIC_RESULT = 10;
+
+    @Pref
+    XPOTunesSharedPref_ mXPOXpoTunesSharedPref;
 
     @ViewById(R.id.btnToggleGame)
     ImageButton mBtnToggleGame;
@@ -79,8 +85,8 @@ public class GameActivity extends AppCompatActivity {
         mBtnToggleGame.setImageResource(R.drawable.play_button);
 
         mBtnSkipMusic.setImageDrawable(new IconDrawable(this, FontAwesomeIcons.fa_fast_forward)
-                .color(Color.parseColor("#E8EAF6"))
-                .sizeDp(24));
+            .color(Color.parseColor("#E8EAF6"))
+            .sizeDp(24));
 
         if (mMusicUri != null && mMusicUri.size() > 0) {
             mBtnToggleGame.setEnabled(true);
@@ -99,6 +105,14 @@ public class GameActivity extends AppCompatActivity {
         super.onStart();
         EventBus.getDefault().register(this);
         mMusicGame.setContext(getApplicationContext());
+
+        boolean localMusic = mXPOXpoTunesSharedPref.localMusic().getOr(false);
+
+        if (!localMusic) {
+            Intent intent = new Intent(this, TrailerActivity_.class);
+            startActivity(intent);
+//            finish();
+        }
     }
 
     @Override

@@ -1,6 +1,12 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <SwitchPreference
+        android:defaultValue="false"
+        android:key="@string/prefLocalMusicKey"
+        android:summary="@string/pref_local_music_summary"
+        android:title="@string/pref_local_music" />
+
+    <SwitchPreference
         android:defaultValue="true"
         android:key="@string/prefRandomTimeKey"
         android:summary="@string/pref_random_time_summary"

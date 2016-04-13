@@ -43,8 +43,13 @@
     <string name="pref_playing_time_summary">Quantidade de segundos para tocar</string>
     <string name="pref_playing_time">Duração</string>
     <string name="restart_app_language">Reinicie para aplicar a nova linguagem</string>
+    <string name="pref_local_music_summary">Usar arquivos locais</string>
+    <string name="pref_local_music">Música offlane</string>
+
+
 
     <!-- Preferences Keys -->
+    <string name="prefLocalMusicKey">showLocalMusic</string>
     <string name="prefPlayingTimeKey">playingTime</string>
     <string name="prefRandomTimeKey">randomTime</string>
     <string name="prefMinimumTimeKey">minimumTime</string>

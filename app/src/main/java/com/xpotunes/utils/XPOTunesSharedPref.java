@@ -31,6 +31,9 @@ public interface XPOTunesSharedPref {
     @DefaultBoolean(false)
     boolean alertStart();
 
+    @DefaultBoolean(value = true, keyRes = R.string.prefLocalMusicKey)
+    boolean localMusic();
+
     @DefaultString("en")
     String language();
 }
