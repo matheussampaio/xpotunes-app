@@ -72,8 +72,9 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/musicDescription"
                 android:layout_below="@+id/mainToolbar"
-                android:layout_marginBottom="32dp"
-                android:layout_marginTop="8dp">
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:background="#00ff">
 
                 <!-- Image Placeholder -->
                 <RelativeLayout
@@ -86,12 +87,10 @@
                 <SeekBar
                     android:id="@+id/musicSeekBar"
                     android:layout_width="250dp"
-                    android:layout_height="64dp"
-                    android:layout_below="@+id/musicImageView"
+                    android:layout_height="32dp"
                     android:layout_alignLeft="@+id/musicImageView"
-                    android:layout_alignStart="@+id/musicImageView"/>
-
-
+                    android:layout_alignStart="@+id/musicImageView"
+                    android:layout_below="@+id/musicImageView" />
 
 
             </RelativeLayout>
@@ -101,8 +100,7 @@
                 android:id="@+id/musicDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/mainMediaControls"
-                android:layout_marginBottom="24dp">
+                android:layout_above="@+id/mainMediaControls">
 
                 <TextView
                     android:id="@+id/musicTitleTextView"
@@ -110,6 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:textColor="@color/neutral"
+                    android:text="Cannonball"
                     android:textSize="34sp" />
 
                 <TextView
@@ -119,6 +118,7 @@
                     android:layout_below="@+id/musicTitleTextView"
                     android:layout_centerHorizontal="true"
                     android:textColor="@color/primary"
+                    android:text="Louder - Lea Michele"
                     android:textSize="20sp" />
 
             </RelativeLayout>
@@ -128,54 +128,69 @@
             <RelativeLayout
                 android:id="@+id/mainMediaControls"
                 android:layout_width="match_parent"
-                android:layout_height="68dp"
+                android:layout_height="80dp"
                 android:layout_alignParentBottom="true"
+                android:paddingTop="8dp"
                 android:layout_marginBottom="16dp">
 
-
-                <net.steamcrafted.materialiconlib.MaterialIconView
+                <Button
                     android:id="@+id/playButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:scaleType="center"
-                    app:materialIcon="play"
-                    app:materialIconColor="@color/primary"
-                    app:materialIconSize="60dp" />
+                    android:layout_below="@+id/progressBar"
+                    android:layout_centerHorizontal="true"
+                    android:background="#000F"
+                    android:text="PLAY"
+                    android:textColor="@color/accent" />
 
-                <net.steamcrafted.materialiconlib.MaterialIconView
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="4dp"
+                    android:visibility="invisible" />
+
+                <Button
+                    android:id="@+id/wholeMusicButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/progressBar"
+                    android:layout_centerHorizontal="true"
+                    android:background="#000F"
+                    android:text="PLAY WHOLE MUSIC"
+                    android:textColor="@color/accent"
+                    android:visibility="invisible" />
+
+                <Button
                     android:id="@+id/skipButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+                    android:layout_alignBaseline="@+id/wholeMusicButton"
                     android:layout_marginLeft="16dp"
-                    android:layout_toRightOf="@+id/playButton"
-                    android:scaleType="center"
-                    app:materialIcon="skip_next"
-                    app:materialIconColor="@color/light_gray"
-                    app:materialIconSize="40dp" />
+                    android:layout_toEndOf="@+id/wholeMusicButton"
+                    android:layout_toRightOf="@+id/wholeMusicButton"
+                    android:background="#000F"
+                    android:text="SKIP"
+                    android:textColor="@color/light_gray"
+                    android:visibility="invisible" />
 
-                <net.steamcrafted.materialiconlib.MaterialIconView
+                <Button
                     android:id="@+id/stopButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/wholeMusicButton"
                     android:layout_centerInParent="true"
-                    android:scaleType="center"
-                    android:visibility="invisible"
-                    app:materialIcon="stop"
-                    app:materialIconColor="@color/primary"
-                    app:materialIconSize="60dp" />
+                    android:layout_marginRight="16dp"
+                    android:layout_toLeftOf="@+id/wholeMusicButton"
+                    android:layout_toStartOf="@+id/wholeMusicButton"
+                    android:background="#000F"
+                    android:text="STOP"
+                    android:textColor="@color/light_gray"
+                    android:visibility="invisible" />
 
-                <ProgressBar
-                    style="?android:attr/progressBarStyleLarge"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_toRightOf="@+id/skipButton"
-                    android:layout_toEndOf="@+id/skipButton"
-                    android:layout_marginLeft="16dp"
-                    android:visibility="invisible"
-                    android:layout_centerVertical="true"
-                    android:id="@+id/progressBar" />
 
             </RelativeLayout>
 

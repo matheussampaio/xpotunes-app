@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -46,13 +47,16 @@ public class TrailerActivity extends AppCompatActivity {
     XPOTunesSharedPref_ mXPOXpoTunesSharedPref;
 
     @ViewById(R.id.playButton)
-    ImageView mPlayButton;
+    Button mPlayButton;
 
     @ViewById(R.id.stopButton)
-    ImageView mStopButton;
+    Button mStopButton;
 
     @ViewById(R.id.skipButton)
-    ImageView mSkipButton;
+    Button mSkipButton;
+
+    @ViewById(R.id.wholeMusicButton)
+    Button mWholeMusicButton;
 
     @ViewById(R.id.musicTitleTextView)
     TextView mMusicTitle;
@@ -108,6 +112,7 @@ public class TrailerActivity extends AppCompatActivity {
 
         mSkipButton.setVisibility(View.VISIBLE);
         mStopButton.setVisibility(View.VISIBLE);
+        mWholeMusicButton.setVisibility(View.VISIBLE);
     }
 
     @Click(R.id.skipButton)
@@ -119,6 +124,7 @@ public class TrailerActivity extends AppCompatActivity {
     void onClickStopButton() {
         mStopButton.setVisibility(View.INVISIBLE);
         mSkipButton.setVisibility(View.INVISIBLE);
+        mWholeMusicButton.setVisibility(View.INVISIBLE);
 
         mXPOMusicPlayer.pause();
         mClockTimer.stop();
@@ -138,6 +144,7 @@ public class TrailerActivity extends AppCompatActivity {
         mSkipButton.setEnabled(false);
         mStopButton.setEnabled(false);
         mPlayButton.setEnabled(false);
+        mWholeMusicButton.setEnabled(false);
     }
 
     @UiThread
@@ -148,6 +155,7 @@ public class TrailerActivity extends AppCompatActivity {
         mSkipButton.setEnabled(true);
         mStopButton.setEnabled(true);
         mPlayButton.setEnabled(true);
+        mWholeMusicButton.setEnabled(true);
     }
 
     @Subscribe
