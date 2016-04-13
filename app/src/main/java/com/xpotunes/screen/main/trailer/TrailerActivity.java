@@ -125,6 +125,7 @@ public class TrailerActivity extends AppCompatActivity {
         mPlayWholeMusic = false;
 
         mPlayButton.setVisibility(View.INVISIBLE);
+        mGenreSpinner.setVisibility(View.INVISIBLE);
 
         fetchRandomMusic();
 
@@ -154,6 +155,7 @@ public class TrailerActivity extends AppCompatActivity {
         mClockTimer.stop();
 
         mPlayButton.setVisibility(View.VISIBLE);
+        mGenreSpinner.setVisibility(View.VISIBLE);
 
         loaded();
     }
