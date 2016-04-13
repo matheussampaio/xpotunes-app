@@ -76,13 +76,12 @@
                 android:layout_marginTop="8dp"
                 android:background="#00ff">
 
-                <!-- Image Placeholder -->
-                <RelativeLayout
+                <ImageView
                     android:id="@+id/musicImageView"
                     android:layout_width="250dp"
                     android:layout_height="250dp"
                     android:layout_centerHorizontal="true"
-                    android:background="#000"></RelativeLayout>
+                    android:src="@drawable/default_music_image2"/>
 
                 <SeekBar
                     android:id="@+id/musicSeekBar"
@@ -108,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:textColor="@color/neutral"
-                    android:text="Cannonball"
+                    android:text=""
                     android:textSize="34sp" />
 
                 <TextView
@@ -118,7 +117,7 @@
                     android:layout_below="@+id/musicTitleTextView"
                     android:layout_centerHorizontal="true"
                     android:textColor="@color/primary"
-                    android:text="Louder - Lea Michele"
+                    android:text=""
                     android:textSize="20sp" />
 
             </RelativeLayout>
@@ -151,6 +150,17 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="4dp"
+                    android:visibility="invisible" />
+
+                <Button
+                    android:id="@+id/pauseButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/progressBar"
+                    android:layout_centerHorizontal="true"
+                    android:background="#000F"
+                    android:text="PAUSE"
+                    android:textColor="@color/primary"
                     android:visibility="invisible" />
 
                 <Button

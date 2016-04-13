@@ -12,7 +12,8 @@ import com.google.android.exoplayer.upstream.Allocator;
 import com.google.android.exoplayer.upstream.DataSource;
 import com.google.android.exoplayer.upstream.DefaultAllocator;
 import com.google.android.exoplayer.upstream.DefaultUriDataSource;
-import com.xpotunes.music.event.MusicStartedEvent;
+import com.xpotunes.music.event.MusicEndEvent;
+import com.xpotunes.music.event.MusicStartEvent;
 import com.xpotunes.pojo.Music;
 import com.xpotunes.rest.RESTful;
 import com.xpotunes.utils.Utils;
@@ -36,15 +37,20 @@ public class XPOMusicPlayer {
     @RootContext
     Context mContext;
 
+    private boolean mPlaying;
+
     public XPOMusicPlayer() {
         mExoPlayer = ExoPlayer.Factory.newInstance(1);
 
         mExoPlayer.addListener(new ExoPlayer.Listener() {
             @Override
             public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+                System.out.println("playWhenReady = [" + playWhenReady + "], playbackState = [" + playbackState + "]");
 
                 if (playbackState == 4) {
-                    EventBus.getDefault().post(new MusicStartedEvent());
+                    EventBus.getDefault().post(new MusicStartEvent());
+                } else if (playbackState == 5) {
+                    EventBus.getDefault().post(new MusicEndEvent());
                 }
             }
 
@@ -87,6 +93,7 @@ public class XPOMusicPlayer {
     }
 
     public XPOMusicPlayer pause() {
+        mPlaying = false;
         mExoPlayer.seekTo(0);
         mExoPlayer.stop();
 
@@ -94,6 +101,8 @@ public class XPOMusicPlayer {
     }
 
     public XPOMusicPlayer play() {
+        mPlaying = true;
+
         mBeginInstant = new Instant();
         mExoPlayer.setPlayWhenReady(true);
 
@@ -106,5 +115,15 @@ public class XPOMusicPlayer {
 
     public Music getMusic() {
         return mMusic;
+    }
+
+    public XPOMusicPlayer seekTo(long millis) {
+        mExoPlayer.seekTo(millis);
+
+        return this;
+    }
+
+    public boolean isPlaying() {
+        return mPlaying;
     }
 }

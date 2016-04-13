@@ -11,7 +11,7 @@ public class ClockTimer {
     private boolean mAlive;
 
     public ClockTimer() {
-        mAlive = true;
+        mAlive = false;
         mDelayToUpdate = 1000;
     }
 
