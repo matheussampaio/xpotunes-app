@@ -1,16 +1,19 @@
 package com.xpotunes.screen.main.trailer;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.xpotunes.R;
 import com.xpotunes.clock.ClockTimer;
 import com.xpotunes.clock.ClockTimerEvent;
 import com.xpotunes.music.XPOMusicPlayer;
+import com.xpotunes.music.event.MusicStartedEvent;
 import com.xpotunes.pojo.Music;
 import com.xpotunes.rest.RESTful;
 import com.xpotunes.screen.main.game.GameActivity_;
@@ -18,6 +21,7 @@ import com.xpotunes.screen.settings.SettingsActivity_;
 import com.xpotunes.utils.Logger;
 import com.xpotunes.utils.XPOTunesSharedPref_;
 
+import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
@@ -59,11 +63,19 @@ public class TrailerActivity extends AppCompatActivity {
     @ViewById(R.id.settingsButton)
     ImageView mSettingsButton;
 
+    @ViewById(R.id.progressBar)
+    ProgressBar mProgressBar;
+
     @Bean
     XPOMusicPlayer mXPOMusicPlayer;
 
     @Bean
     ClockTimer mClockTimer;
+
+    @AfterViews
+    public void afterViews() {
+        mProgressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor("#CFCFCF"), android.graphics.PorterDuff.Mode.SRC_ATOP);
+    }
 
     @Override
     protected void onStart() {
@@ -119,13 +131,20 @@ public class TrailerActivity extends AppCompatActivity {
         SettingsActivity_.intent(this).start();
     }
 
+    @UiThread
     void loading() {
+        mProgressBar.setVisibility(View.VISIBLE);
+
         mSkipButton.setEnabled(false);
         mStopButton.setEnabled(false);
         mPlayButton.setEnabled(false);
     }
 
-    void loaded() {
+    @UiThread
+    @Subscribe
+    void onMusicStartedEvent(MusicStartedEvent event) {
+        mProgressBar.setVisibility(View.INVISIBLE);
+
         mSkipButton.setEnabled(true);
         mStopButton.setEnabled(true);
         mPlayButton.setEnabled(true);
@@ -133,7 +152,9 @@ public class TrailerActivity extends AppCompatActivity {
 
     @Subscribe
     public void onClockTimerEvent(ClockTimerEvent event) {
-        if (mXPOMusicPlayer.getDuration() >= 30) {
+        System.out.println("getDuration() = " + mXPOMusicPlayer.getDuration());
+
+        if (mXPOMusicPlayer.getDuration() >= 10) {
 
             Call<Music> musicCall = RESTful.getInstance().addView(mXPOMusicPlayer.getMusic().getId());
             musicCall.enqueue(new Callback<Music>() {
@@ -175,8 +196,6 @@ public class TrailerActivity extends AppCompatActivity {
                         .pause()
                         .prepare()
                         .play();
-
-                loaded();
             }
 
             @Override

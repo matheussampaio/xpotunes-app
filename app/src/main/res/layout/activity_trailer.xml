@@ -92,6 +92,8 @@
                     android:layout_alignStart="@+id/musicImageView"/>
 
 
+
+
             </RelativeLayout>
 
             <!-- Description -->
@@ -163,6 +165,17 @@
                     app:materialIcon="stop"
                     app:materialIconColor="@color/primary"
                     app:materialIconSize="60dp" />
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_toRightOf="@+id/skipButton"
+                    android:layout_toEndOf="@+id/skipButton"
+                    android:layout_marginLeft="16dp"
+                    android:visibility="invisible"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/progressBar" />
 
             </RelativeLayout>
 

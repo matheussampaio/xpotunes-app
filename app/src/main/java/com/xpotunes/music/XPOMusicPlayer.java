@@ -3,6 +3,7 @@ package com.xpotunes.music;
 import android.content.Context;
 import android.net.Uri;
 
+import com.google.android.exoplayer.ExoPlaybackException;
 import com.google.android.exoplayer.ExoPlayer;
 import com.google.android.exoplayer.MediaCodecAudioTrackRenderer;
 import com.google.android.exoplayer.MediaCodecSelector;
@@ -11,12 +12,14 @@ import com.google.android.exoplayer.upstream.Allocator;
 import com.google.android.exoplayer.upstream.DataSource;
 import com.google.android.exoplayer.upstream.DefaultAllocator;
 import com.google.android.exoplayer.upstream.DefaultUriDataSource;
+import com.xpotunes.music.event.MusicStartedEvent;
 import com.xpotunes.pojo.Music;
 import com.xpotunes.rest.RESTful;
 import com.xpotunes.utils.Utils;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
+import org.greenrobot.eventbus.EventBus;
 import org.joda.time.Duration;
 import org.joda.time.Instant;
 
@@ -35,6 +38,26 @@ public class XPOMusicPlayer {
 
     public XPOMusicPlayer() {
         mExoPlayer = ExoPlayer.Factory.newInstance(1);
+
+        mExoPlayer.addListener(new ExoPlayer.Listener() {
+            @Override
+            public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+
+                if (playbackState == 4) {
+                    EventBus.getDefault().post(new MusicStartedEvent());
+                }
+            }
+
+            @Override
+            public void onPlayWhenReadyCommitted() {
+                System.out.println("XPOMusicPlayer.onPlayWhenReadyCommitted");
+            }
+
+            @Override
+            public void onPlayerError(ExoPlaybackException error) {
+                System.out.println("XPOMusicPlayer.onPlayerError");
+            }
+        });
     }
 
     public XPOMusicPlayer prepare() {
