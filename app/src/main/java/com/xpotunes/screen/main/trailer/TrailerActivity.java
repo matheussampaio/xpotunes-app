@@ -160,9 +160,6 @@ public class TrailerActivity extends AppCompatActivity {
 
         loading();
         playMusic(music);
-
-        // remove this
-//        mXPOMusicPlayer.seekTo(30000);
     }
 
     @Click(R.id.settingsButton)
@@ -216,7 +213,7 @@ public class TrailerActivity extends AppCompatActivity {
         System.out.println("getDuration() = " + mXPOMusicPlayer.getDuration() +
         "   mLoading = " + mLoading + "  mPlayWholeMusic = " + mPlayWholeMusic);
 
-        if (!mLoading && !mPlayWholeMusic && mXPOMusicPlayer.isPlaying() && mXPOMusicPlayer.getDuration() >= 10) {
+        if (!mLoading && !mPlayWholeMusic && mXPOMusicPlayer.isPlaying() && mXPOMusicPlayer.getCurrentPosition() >= mXPOMusicPlayer.getMusic().getEnd()) {
             fetchRandomMusic();
         }
     }
@@ -248,14 +245,16 @@ public class TrailerActivity extends AppCompatActivity {
     }
 
     private void playMusic(Music music) {
+        System.out.println("start = " + music.getStart() + "  end = " + music.getEnd());
         updateDescription(music);
 
-        mXPOMusicPlayer
-                .setMusic(music)
-                .pause()
-                .prepare()
-//                .seekTo(music.getStart())
-                .play();
+        mXPOMusicPlayer.setMusic(music).pause().prepare();
+
+        if (!mPlayWholeMusic) {
+            mXPOMusicPlayer.seekTo(music.getStart());
+        }
+
+        mXPOMusicPlayer.play();
     }
 
     private void register() {

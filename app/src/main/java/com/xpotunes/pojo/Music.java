@@ -46,6 +46,40 @@ public class Music {
     @SerializedName("views")
     @Expose
     private Integer views;
+    @SerializedName("start")
+    @Expose
+    private Integer start;
+    @SerializedName("end")
+    @Expose
+    private Integer end;
+
+    /**
+     * @return The end
+     */
+    public Integer getEnd() {
+        return end;
+    }
+
+    /**
+     * @param end The end
+     */
+    public void setEnd(Integer end) {
+        this.end = end;
+    }
+
+    /**
+     * @return The start
+     */
+    public Integer getStart() {
+        return start;
+    }
+
+    /**
+     * @param start The start
+     */
+    public void setStart(Integer start) {
+        this.start = start;
+    }
 
     /**
      * @return The Id

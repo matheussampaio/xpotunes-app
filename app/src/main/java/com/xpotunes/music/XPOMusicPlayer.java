@@ -21,8 +21,6 @@ import com.xpotunes.utils.Utils;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 import org.greenrobot.eventbus.EventBus;
-import org.joda.time.Duration;
-import org.joda.time.Instant;
 
 @EBean(scope = EBean.Scope.Singleton)
 public class XPOMusicPlayer {
@@ -30,7 +28,6 @@ public class XPOMusicPlayer {
     private static final int BUFFER_SEGMENT_SIZE = 64 * 1024;
     private static final int BUFFER_SEGMENT_COUNT = 10;
 
-    private Instant mBeginInstant;
     private ExoPlayer mExoPlayer;
     private Music mMusic;
 
@@ -61,7 +58,7 @@ public class XPOMusicPlayer {
 
             @Override
             public void onPlayerError(ExoPlaybackException error) {
-                System.out.println("XPOMusicPlayer.onPlayerError");
+                System.err.println("XPOMusicPlayer.onPlayerError = " + error.getMessage());
             }
         });
     }
@@ -103,14 +100,13 @@ public class XPOMusicPlayer {
     public XPOMusicPlayer play() {
         mPlaying = true;
 
-        mBeginInstant = new Instant();
         mExoPlayer.setPlayWhenReady(true);
 
         return this;
     }
 
-    public int getDuration() {
-        return (int) new Duration(mBeginInstant, new Instant()).getStandardSeconds();
+    public long getCurrentPosition() {
+        return mExoPlayer.getCurrentPosition();
     }
 
     public Music getMusic() {
@@ -121,6 +117,10 @@ public class XPOMusicPlayer {
         mExoPlayer.seekTo(millis);
 
         return this;
+    }
+
+    public ExoPlayer getPlayer() {
+        return mExoPlayer;
     }
 
     public boolean isPlaying() {
