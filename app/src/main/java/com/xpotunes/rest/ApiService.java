@@ -17,6 +17,9 @@ public interface ApiService {
     @POST("music/{id}/view")
     Call<Music> addView(@Path("id") String musicId);
 
+    @POST("music/{id}/trailer")
+    Call<Music> addTrailerView(@Path("id") String musicId);
+
     @POST("music/{id}/like")
     Call<Music> addLike(@Path("id") String musicId);
 

@@ -22,4 +22,34 @@ public class RESTful {
 
         return instance;
     }
+
+    public static void addView(String id) {
+        Call<Music> musicCall = RESTful.getInstance().addView(id);
+
+        musicCall.enqueue(new Callback<Music>() {
+            @Override
+            public void onResponse(Call<Music> call, Response<Music> response) {
+            }
+
+            @Override
+            public void onFailure(Call<Music> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public static void addTrailerView(String id) {
+        Call<Music> musicCall = RESTful.getInstance().addTrailerView(id);
+
+        musicCall.enqueue(new Callback<Music>() {
+            @Override
+            public void onResponse(Call<Music> call, Response<Music> response) {
+            }
+
+            @Override
+            public void onFailure(Call<Music> call, Throwable t) {
+
+            }
+        });
+    }
 }

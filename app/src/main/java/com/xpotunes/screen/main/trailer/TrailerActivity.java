@@ -199,7 +199,8 @@ public class TrailerActivity extends AppCompatActivity {
         if (mPlayWholeMusic = true) {
             mPauseButton.setVisibility(View.INVISIBLE);
             mWholeMusicButton.setVisibility(View.VISIBLE);
-            addView();
+
+            RESTful.addView(mXPOMusicPlayer.getMusic().getId());
         }
 
         mPlayWholeMusic = false;
@@ -234,6 +235,10 @@ public class TrailerActivity extends AppCompatActivity {
             public void onResponse(Call<List<Music>> call, Response<List<Music>> response) {
                 Music music = response.body().get(0);
 
+                if (!mPlayWholeMusic) {
+                    RESTful.addTrailerView(music.getId());
+                }
+
                 playMusic(music);
             }
 
@@ -267,18 +272,5 @@ public class TrailerActivity extends AppCompatActivity {
         EventBus.getDefault().unregister(this);
     }
 
-    private void addView() {
-        Call<Music> musicCall = RESTful.getInstance().addView(mXPOMusicPlayer.getMusic().getId());
-        musicCall.enqueue(new Callback<Music>() {
-            @Override
-            public void onResponse(Call<Music> call, Response<Music> response) {
-                Logger.i("view add: ");
-            }
 
-            @Override
-            public void onFailure(Call<Music> call, Throwable t) {
-
-            }
-        });
-    }
 }
