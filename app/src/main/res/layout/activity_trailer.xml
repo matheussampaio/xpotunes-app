@@ -5,7 +5,7 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_gray"
+    android:background="@drawable/xpo_tunes_logo_with_background10"
     tools:context=".screen.main.trailer.TrailerActivity_">
 
     <com.sothree.slidinguppanel.SlidingUpPanelLayout
@@ -180,10 +180,11 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/progressBar"
                     android:layout_centerHorizontal="true"
-                    android:background="#000F"
+                    android:background="#3cff6200"
                     android:text="PLAY WHOLE MUSIC"
                     android:textColor="@color/accent"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:backgroundTint="#27ffffff" />
 
                 <Button
                     android:id="@+id/skipButton"
@@ -193,10 +194,11 @@
                     android:layout_marginLeft="16dp"
                     android:layout_toEndOf="@+id/wholeMusicButton"
                     android:layout_toRightOf="@+id/wholeMusicButton"
-                    android:background="#000F"
+                    android:background="#3cff6200"
                     android:text="SKIP"
                     android:textColor="@color/light_gray"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:backgroundTint="#27ffffff" />
 
                 <Button
                     android:id="@+id/stopButton"
@@ -207,10 +209,11 @@
                     android:layout_marginRight="16dp"
                     android:layout_toLeftOf="@+id/wholeMusicButton"
                     android:layout_toStartOf="@+id/wholeMusicButton"
-                    android:background="#000F"
+                    android:background="#3cff6200"
                     android:text="STOP"
                     android:textColor="@color/light_gray"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:backgroundTint="#27ffffff" />
 
             </RelativeLayout>
 
@@ -227,14 +230,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="68dp"
                 android:layout_alignParentTop="true"
-                android:background="#283037">
+                android:background="@drawable/xpo_tunes_logo_with_background12">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="Playlist">
+                    android:text="Playlist"
+                    android:textColor="@color/accent">
 
                 </TextView>
 
