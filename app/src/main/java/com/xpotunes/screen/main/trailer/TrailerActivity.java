@@ -30,6 +30,7 @@ import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ItemSelect;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.WindowFeature;
@@ -96,6 +97,11 @@ public class TrailerActivity extends AppCompatActivity {
     @AfterViews
     public void afterViews() {
         mProgressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor("#CFCFCF"), android.graphics.PorterDuff.Mode.SRC_ATOP);
+    }
+
+    @ItemSelect(R.id.genreSpinner)
+    public void myListItemSelected(boolean selected, int position) {
+        ((TextView) mGenreSpinner.getChildAt(0)).setTextColor(Color.parseColor("#FF5252"));
     }
 
     @Override
@@ -173,6 +179,11 @@ public class TrailerActivity extends AppCompatActivity {
         playMusic(music);
     }
 
+    @Click(R.id.pauseButton)
+    void onClickPauseButton() {
+        onClickStopButton();
+    }
+
     @Click(R.id.settingsButton)
     void onClickSettingsButton() {
         SettingsActivity_.intent(this).start();
@@ -224,9 +235,6 @@ public class TrailerActivity extends AppCompatActivity {
     @Subscribe
     @Background
     public void onClockTimerEvent(ClockTimerEvent event) {
-        System.out.println("getDuration() = " + mXPOMusicPlayer.getDuration() +
-        "   mLoading = " + mLoading + "  mPlayWholeMusic = " + mPlayWholeMusic);
-
         if (!mLoading && !mPlayWholeMusic && mXPOMusicPlayer.isPlaying() && mXPOMusicPlayer.getCurrentPosition() >= mXPOMusicPlayer.getMusic().getEnd()) {
             fetchRandomMusic();
         }
