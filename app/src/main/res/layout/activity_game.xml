@@ -90,7 +90,7 @@
             android:layout_width="64dip"
             android:layout_height="64dip"
             android:visibility="invisible"
-            app:cb_color="#3F51B5"
+            app:cb_color="@color/primary"
             app:cb_pressedRingWidth="8dip" />
 
         <ImageButton
@@ -106,7 +106,7 @@
             android:layout_marginBottom="32dp"
             android:text="Skip"
             android:visibility="invisible"
-            app:cb_color="#3F51B5"
+            app:cb_color="@color/primary"
             app:cb_pressedRingWidth="8dip" />
 
     </LinearLayout>
