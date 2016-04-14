@@ -39,6 +39,5 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
     compile 'com.github.markushi:circlebutton:1.1'
     compile 'net.steamcrafted:materialiconlib:1.0.9'
-
-
+    compile 'com.github.ViksaaSkool:AutoFitEditText:53238e2d29'
 }

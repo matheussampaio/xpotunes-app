@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.autofit.et.lib.AutoFitEditText;
 import com.xpotunes.R;
 import com.xpotunes.adapter.MusicAdapter;
 import com.xpotunes.clock.ClockTimer;
@@ -75,10 +76,10 @@ public class TrailerActivity extends AppCompatActivity {
     Button mPauseButton;
 
     @ViewById(R.id.musicTitleTextView)
-    TextView mMusicTitle;
+    AutoFitEditText mMusicTitle;
 
     @ViewById(R.id.musicSubTitleTextView)
-    TextView mMusicSubTitle;
+    AutoFitEditText mMusicSubTitle;
 
     @ViewById(R.id.settingsButton)
     ImageView mSettingsButton;

@@ -99,24 +99,30 @@
                 android:id="@+id/musicDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/mainMediaControls">
+                android:layout_above="@+id/mainMediaControls"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp">
 
-                <TextView
+                <com.autofit.et.lib.AutoFitEditText
                     android:id="@+id/musicTitleTextView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
+                    android:maxLines="1"
                     android:text=""
+                    android:textAlignment="center"
                     android:textColor="@color/neutral"
                     android:textSize="34sp" />
 
-                <TextView
+                <com.autofit.et.lib.AutoFitEditText
                     android:id="@+id/musicSubTitleTextView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/musicTitleTextView"
                     android:layout_centerHorizontal="true"
+                    android:maxLines="2"
                     android:text=""
+                    android:textAlignment="center"
                     android:textColor="@color/primary"
                     android:textSize="20sp" />
 
