@@ -65,6 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="invisible"
+            android:textColor="@color/light_gray"
             android:text="@string/default_song_name" />
 
         <TextView
@@ -72,6 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textColor="@color/light_gray"
             android:text="@string/default_time"
             android:visibility="invisible" />
 
