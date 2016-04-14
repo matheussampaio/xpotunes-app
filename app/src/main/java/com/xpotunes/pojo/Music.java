@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class Music {
+public class Music implements Cloneable {
 
     @SerializedName("_id")
     @Expose
@@ -52,6 +52,15 @@ public class Music {
     @SerializedName("end")
     @Expose
     private Integer end;
+
+
+
+    @SerializedName("trailers")
+    @Expose
+    private Integer trailers;
+
+    @Expose(serialize = false, deserialize = false)
+    private boolean mIsTrailer;
 
     /**
      * @return The end
@@ -263,9 +272,48 @@ public class Music {
         this.description = description;
     }
 
+    public Integer getTrailers() {
+        return trailers;
+    }
+
+    public void setTrailers(Integer trailers) {
+        this.trailers = trailers;
+    }
+
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
 
+    public void setTrailer(boolean trailer) {
+        mIsTrailer = trailer;
+    }
+
+    public boolean isTrailer() {
+        return mIsTrailer;
+    }
+
+    public static Music clone(Music music){
+        Music clone = new Music();
+
+        clone.title = music.title;
+        clone.album = music.album;
+        clone.artist = music.artist;
+        clone.genre = music.genre;
+        clone.description = music.description;
+        clone.filename = music.filename;
+        clone.size = music.size;
+        clone.start = music.start;
+        clone.end = music.end;
+        clone.user = music.user;
+        clone.file = music.file;
+        clone.trailers = music.trailers;
+        clone.views = music.views;
+        clone.likes = music.likes;
+        clone.dislikes = music.dislikes;
+        clone.Id = music.Id;
+        clone.mIsTrailer = music.mIsTrailer;
+
+        return clone;
+    }
 }

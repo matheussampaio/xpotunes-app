@@ -7,12 +7,14 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.xpotunes.R;
+import com.xpotunes.adapter.MusicAdapter;
 import com.xpotunes.clock.ClockTimer;
 import com.xpotunes.clock.ClockTimerEvent;
 import com.xpotunes.music.XPOMusicPlayer;
@@ -30,6 +32,7 @@ import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.ItemSelect;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
@@ -39,6 +42,7 @@ import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -85,6 +89,9 @@ public class TrailerActivity extends AppCompatActivity {
     @ViewById(R.id.genreSpinner)
     Spinner mGenreSpinner;
 
+    @ViewById(R.id.historyListView)
+    ListView mHistoryListView;
+
     @Bean
     XPOMusicPlayer mXPOMusicPlayer;
 
@@ -93,15 +100,25 @@ public class TrailerActivity extends AppCompatActivity {
 
     private boolean mPlayWholeMusic = false;
     private boolean mLoading = false;
+    private ArrayList<Music> mHistoryMusic;
+    private MusicAdapter mMusicAdapter;
 
     @AfterViews
     public void afterViews() {
         mProgressBar.getIndeterminateDrawable().setColorFilter(Color.parseColor("#CFCFCF"), android.graphics.PorterDuff.Mode.SRC_ATOP);
+
+        mHistoryMusic = new ArrayList<>();
+        mMusicAdapter = new MusicAdapter(this, R.layout.music_adapter, mHistoryMusic);
+
+        mHistoryListView.setAdapter(mMusicAdapter);
+        mHistoryListView.setEmptyView(findViewById(android.R.id.empty));
     }
 
     @ItemSelect(R.id.genreSpinner)
     public void myListItemSelected(boolean selected, int position) {
-        ((TextView) mGenreSpinner.getChildAt(0)).setTextColor(Color.parseColor("#FF5252"));
+        if (mGenreSpinner != null) {
+            ((TextView) mGenreSpinner.getChildAt(0)).setTextColor(Color.parseColor("#FF5252"));
+        }
     }
 
     @Override
@@ -129,54 +146,41 @@ public class TrailerActivity extends AppCompatActivity {
     @Click(R.id.playButton)
     void onClickPlayButton() {
         mPlayWholeMusic = false;
-
-        mPlayButton.setVisibility(View.INVISIBLE);
-        mGenreSpinner.setVisibility(View.INVISIBLE);
-
         fetchRandomMusic();
 
-        mSkipButton.setVisibility(View.VISIBLE);
-        mStopButton.setVisibility(View.VISIBLE);
-        mWholeMusicButton.setVisibility(View.VISIBLE);
+        configueButtonsPlayTrailer();
     }
+
+
 
     @Click(R.id.skipButton)
     void onClickSkipButton() {
-        mPlayWholeMusic = false;
-
-        fetchRandomMusic();
+        onClickPlayButton();
     }
 
     @Click(R.id.stopButton)
     void onClickStopButton() {
         mPlayWholeMusic = false;
 
-        mStopButton.setVisibility(View.INVISIBLE);
-        mSkipButton.setVisibility(View.INVISIBLE);
-        mWholeMusicButton.setVisibility(View.INVISIBLE);
-        mPauseButton.setVisibility(View.INVISIBLE);
-
         mXPOMusicPlayer.pause();
 
         mClockTimer.stop();
 
-        mPlayButton.setVisibility(View.VISIBLE);
-        mGenreSpinner.setVisibility(View.VISIBLE);
-
         loaded();
+
+        configureButtonsStop();
     }
 
     @Click(R.id.wholeMusicButton)
     void onClickWholeMusicButton() {
         mPlayWholeMusic = true;
 
-        mWholeMusicButton.setVisibility(View.INVISIBLE);
-        mPauseButton.setVisibility(View.VISIBLE);
-
         Music music = mXPOMusicPlayer.getMusic();
+        music.setTrailer(false);
 
         loading();
         playMusic(music);
+        configureButtonsPlayWholeMusic();
     }
 
     @Click(R.id.pauseButton)
@@ -189,6 +193,21 @@ public class TrailerActivity extends AppCompatActivity {
         SettingsActivity_.intent(this).start();
     }
 
+    @ItemClick(R.id.historyListView)
+    void historyListItemClicked(int position) {
+        if (position > 0 && position < 5) {
+            Music music = mHistoryMusic.remove(position);
+
+            if (music.isTrailer()) {
+                configueButtonsPlayTrailer();
+            } else {
+                configureButtonsPlayWholeMusic();
+            }
+
+            playMusic(music);
+        }
+    }
+    
     @UiThread
     void loading() {
         mLoading = true;
@@ -221,8 +240,7 @@ public class TrailerActivity extends AppCompatActivity {
     @Subscribe
     void onMusicEndEvent(MusicEndEvent event) {
         if (mPlayWholeMusic = true) {
-            mPauseButton.setVisibility(View.INVISIBLE);
-            mWholeMusicButton.setVisibility(View.VISIBLE);
+            configueButtonsPlayTrailer();
 
             RESTful.addView(mXPOMusicPlayer.getMusic().getId());
         }
@@ -260,6 +278,7 @@ public class TrailerActivity extends AppCompatActivity {
                     Music music = response.body().get(0);
 
                     if (!mPlayWholeMusic) {
+                        music.setTrailer(true);
                         RESTful.addTrailerView(music.getId());
                     }
 
@@ -279,15 +298,26 @@ public class TrailerActivity extends AppCompatActivity {
     private void playMusic(Music music) {
         mClockTimer.start();
 
+        updateHistory(Music.clone(music));
         updateDescription(music);
 
         mXPOMusicPlayer.setMusic(music).pause().prepare();
 
-        if (!mPlayWholeMusic) {
+        if (music.isTrailer()) {
             mXPOMusicPlayer.seekTo(music.getStart());
         }
 
         mXPOMusicPlayer.play();
+    }
+
+    private void updateHistory(Music music) {
+        mHistoryMusic.add(0, music);
+
+        while (mHistoryMusic.size() > 25) {
+            mHistoryMusic.remove(mHistoryMusic.size() - 1);
+        }
+
+        mMusicAdapter.notifyDataSetChanged();
     }
 
     private void nothingToPlay() {
@@ -306,5 +336,32 @@ public class TrailerActivity extends AppCompatActivity {
         EventBus.getDefault().unregister(this);
     }
 
+
+    private void configueButtonsPlayTrailer() {
+        mPlayButton.setVisibility(View.INVISIBLE);
+        mGenreSpinner.setVisibility(View.INVISIBLE);
+        mPauseButton.setVisibility(View.INVISIBLE);
+
+        mSkipButton.setVisibility(View.VISIBLE);
+        mStopButton.setVisibility(View.VISIBLE);
+        mWholeMusicButton.setVisibility(View.VISIBLE);
+    }
+
+    private void configureButtonsStop() {
+        mStopButton.setVisibility(View.INVISIBLE);
+        mSkipButton.setVisibility(View.INVISIBLE);
+        mWholeMusicButton.setVisibility(View.INVISIBLE);
+        mPauseButton.setVisibility(View.INVISIBLE);
+
+        mPlayButton.setVisibility(View.VISIBLE);
+        mGenreSpinner.setVisibility(View.VISIBLE);
+    }
+
+    private void configureButtonsPlayWholeMusic() {
+        configueButtonsPlayTrailer();
+
+        mWholeMusicButton.setVisibility(View.INVISIBLE);
+        mPauseButton.setVisibility(View.VISIBLE);
+    }
 
 }
