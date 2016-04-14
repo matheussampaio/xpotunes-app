@@ -16,6 +16,7 @@
 
         <activity
             android:name=".screen.splash.SplashActivity_"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.BrandedLaunch">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,28 +26,30 @@
         </activity>
 
         <activity
-            android:name=".screen.main.MainActivity_">
-        </activity>
+            android:name=".screen.main.MainActivity_"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".screen.main.trailer.TrailerActivity_"
-            android:launchMode="singleTop">
-        </activity>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".screen.main.game.GameActivity_"
-            android:launchMode="singleTop">
-        </activity>
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".screen.library.MusicLibraryActivity_"
             android:label="@string/title_activity_music_library"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".screen.settings.SettingsActivity_"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".screen.main.MainActivity_">
+            android:parentActivityName=".screen.main.MainActivity_"
+            android:screenOrientation="portrait">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

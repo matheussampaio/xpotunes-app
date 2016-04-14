@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
             intent = new Intent(this, TrailerActivity_.class);
         }
 
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
         finish();
     }
