@@ -5,7 +5,7 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/xpo_tunes_logo_with_background10"
+    android:background="@drawable/background"
     tools:context=".screen.main.trailer.TrailerActivity_">
 
     <com.sothree.slidinguppanel.SlidingUpPanelLayout
@@ -47,7 +47,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="8dp"
                     android:layout_toRightOf="@+id/toolbarArrow"
-                    android:text="Playing Trailer"
+                    android:text="XPO Tunes - Online"
                     android:textColor="@color/light_gray"
                     android:textSize="24dp" />
 
@@ -84,12 +84,12 @@
                     android:src="@drawable/default_music_image2" />
 
                 <!--<SeekBar-->
-                    <!--android:id="@+id/musicSeekBar"-->
-                    <!--android:layout_width="250dp"-->
-                    <!--android:layout_height="32dp"-->
-                    <!--android:layout_alignLeft="@+id/musicImageView"-->
-                    <!--android:layout_alignStart="@+id/musicImageView"-->
-                    <!--android:layout_below="@+id/musicImageView" />-->
+                <!--android:id="@+id/musicSeekBar"-->
+                <!--android:layout_width="250dp"-->
+                <!--android:layout_height="32dp"-->
+                <!--android:layout_alignLeft="@+id/musicImageView"-->
+                <!--android:layout_alignStart="@+id/musicImageView"-->
+                <!--android:layout_below="@+id/musicImageView" />-->
 
 
             </RelativeLayout>
@@ -108,6 +108,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
+                    android:inputType="textNoSuggestions"
                     android:maxLines="1"
                     android:text=""
                     android:textAlignment="center"
@@ -120,6 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/musicTitleTextView"
                     android:layout_centerHorizontal="true"
+                    android:inputType="textNoSuggestions"
                     android:maxLines="2"
                     android:text=""
                     android:textAlignment="center"
@@ -237,8 +239,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="68dp"
                 android:layout_alignParentTop="true"
-                android:padding="16dp"
-                android:background="@drawable/xpo_tunes_logo_with_background12">
+                android:background="@drawable/xpo_tunes_logo_with_background12"
+                android:padding="16dp">
 
                 <net.steamcrafted.materialiconlib.MaterialIconView
                     android:layout_width="wrap_content"
@@ -262,8 +264,8 @@
                 <net.steamcrafted.materialiconlib.MaterialIconView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:scaleType="center"
                     app:materialIcon="dots_vertical"
@@ -277,18 +279,17 @@
             <ListView
                 android:id="@+id/historyListView"
                 android:layout_width="match_parent"
-                android:layout_below="@+id/historyToolbar"
-                android:layout_height="wrap_content">
-            </ListView>
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/historyToolbar"></ListView>
 
             <TextView
                 android:id="@android:id/empty"
-                android:layout_below="@+id/historyToolbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/historyToolbar"
                 android:layout_centerHorizontal="true"
-                android:textColor="@color/primary"
                 android:text="Empty"
+                android:textColor="@color/primary"
                 android:textSize="22sp" />
 
         </RelativeLayout>

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -30,10 +31,9 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OnActivityResult;
-import org.androidannotations.annotations.OptionsItem;
-import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.annotations.WindowFeature;
 import org.androidannotations.annotations.res.StringRes;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.greenrobot.eventbus.EventBus;
@@ -43,8 +43,8 @@ import java.util.ArrayList;
 
 import at.markushi.ui.CircleButton;
 
+@WindowFeature({ Window.FEATURE_NO_TITLE })
 @EActivity(R.layout.activity_game)
-@OptionsMenu(R.menu.settings)
 public class GameActivity extends AppCompatActivity {
 
     private static final int SELECT_MUSIC_RESULT = 10;
@@ -95,8 +95,8 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    @OptionsItem(R.id.settings)
-    void menuSettings() {
+    @Click(R.id.settingsButton)
+    void onClickSettingsButton() {
         SettingsActivity_.intent(this).start();
     }
 

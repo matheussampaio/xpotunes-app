@@ -118,7 +118,11 @@ public class TrailerActivity extends AppCompatActivity {
     @ItemSelect(R.id.genreSpinner)
     public void myListItemSelected(boolean selected, int position) {
         if (mGenreSpinner != null) {
-            ((TextView) mGenreSpinner.getChildAt(0)).setTextColor(Color.parseColor("#FF5252"));
+            TextView spinner = (TextView) mGenreSpinner.getChildAt(0);
+
+            if (spinner != null) {
+                spinner.setTextColor(Color.parseColor("#FF5252"));
+            }
         }
     }
 

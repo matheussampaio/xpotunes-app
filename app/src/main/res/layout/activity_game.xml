@@ -1,16 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:XPOTunes="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/xpo_tunes_logo_with_background10"
+    android:background="@drawable/background"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".screen.main.game.GameActivity">
+
+    <!-- Toolbar -->
+    <RelativeLayout
+        android:id="@+id/mainToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_alignParentTop="true"
+        android:padding="16dp">
+
+        <net.steamcrafted.materialiconlib.MaterialIconView
+            android:id="@+id/toolbarArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:scaleType="center"
+            app:materialIcon="arrow_bottom_right"
+            app:materialIconColor="@color/primary"
+            app:materialIconSize="30dp" />
+
+        <TextView
+            android:id="@+id/statusTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/toolbarArrow"
+            android:text="XPO Tunes - Offlane"
+            android:textColor="@color/light_gray"
+            android:textSize="24dp" />
+
+        <net.steamcrafted.materialiconlib.MaterialIconView
+            android:id="@+id/settingsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="center"
+            app:materialIcon="settings"
+            app:materialIconColor="@color/light_gray"
+            app:materialIconSize="30dp" />
+
+
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/layoutTop"
@@ -47,8 +88,8 @@
             android:layout_width="64dip"
             android:layout_height="64dip"
             android:visibility="invisible"
-            XPOTunes:cb_color="#3F51B5"
-            XPOTunes:cb_pressedRingWidth="8dip" />
+            app:cb_color="#3F51B5"
+            app:cb_pressedRingWidth="8dip" />
 
         <ImageButton
             android:id="@+id/btnToggleGame"
@@ -63,8 +104,8 @@
             android:layout_marginBottom="32dp"
             android:text="Skip"
             android:visibility="invisible"
-            XPOTunes:cb_color="#3F51B5"
-            XPOTunes:cb_pressedRingWidth="8dip" />
+            app:cb_color="#3F51B5"
+            app:cb_pressedRingWidth="8dip" />
 
     </LinearLayout>
 
